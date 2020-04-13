@@ -1,3 +1,5 @@
+# Predicting Movie Ratings with Sentiment Analysis
+
 ### Introduction
 
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
@@ -24,7 +26,9 @@ There are inherent problems with our approach. For example, individual reviews m
 ---
 
 [GitHub page editor](https://github.com/baranusluel/sentiment-cnn/edit/master/index.md)
+
 [Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
