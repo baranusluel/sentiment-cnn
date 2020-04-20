@@ -1,5 +1,7 @@
 # Predicting Movie Ratings with Sentiment Analysis
 
+https://github.com/baranusluel/sentiment-cnn
+
 ### Introduction
 
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
@@ -22,43 +24,3 @@ We will evaluate the accuracy of our model by comparing the model’s predicted 
 ### Discussion
 
 There are inherent problems with our approach. For example, individual reviews may be rated from zero to five stars, but we will classify each review only as positive, neutral, or negative. Hypothetically, if every review corresponded to four stars, our classification would cause our model to consider every review positive and predict a rating of five stars. Realistically, however, this problem should not be that significant since the actual reviews should be distributed over a wider range.
-
----
-
-[GitHub page editor](https://github.com/baranusluel/sentiment-cnn/edit/master/index.md)
-
-[Markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-
-[GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/baranusluel/sentiment-cnn/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
