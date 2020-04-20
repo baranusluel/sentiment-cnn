@@ -1,7 +1,3 @@
-# Predicting Movie Ratings with Sentiment Analysis
-
-#### [Source Code](https://github.com/baranusluel/sentiment-cnn)
-
 ### Introduction
 
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
