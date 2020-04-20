@@ -1,6 +1,6 @@
 # Predicting Movie Ratings with Sentiment Analysis
 
-https://github.com/baranusluel/sentiment-cnn
+#### [Source Code](https://github.com/baranusluel/sentiment-cnn)
 
 ### Introduction
 
