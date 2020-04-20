@@ -2,6 +2,9 @@ title: Sentiment Analysis with Convolutional Neural Networks
 description: Developing a deep convolutional neural network for sentiment analysis in movie reviews. Final group project for CS4641 Machine Learning (Spring 2020).
 author: "Baran Usluel, Sylesh K Suresh, Kenneth William Wardlaw, Vietfu Tang, and Yash Raghavendra Vaidya"
 
-github.repository_url: https://github.com/baranusluel/sentiment-cnn
+github:
+  public: true
+  is_project_page: true
+  repository_url: https://github.com/baranusluel/sentiment-cnn
 
 theme: jekyll-theme-tactile
