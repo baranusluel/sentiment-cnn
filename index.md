@@ -2,9 +2,7 @@
 
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
 
-Our team performs supervised learning with a neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews from multiple movie review aggregators such as IMDB and Rotten Tomatoes with corresponding sentiment labels, as found in existing datasets [5][6].
-
-We first train a sentiment analysis model on the reviews to predict positive, neutral or negative sentiments. For further analysis, we average the sentiment results of individual movies to predict numerical movie ratings. We finally compare our sentiment analysis model’s predicted ratings to the actual ratings to determine whether there are biases associated with different movie review aggregators.
+Our team performs supervised learning with a convolutional neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews from multiple movie review aggregators such as IMDB and Rotten Tomatoes with corresponding sentiment labels, as found in existing datasets [5][6].
 
 ### Methods
 
@@ -20,3 +18,17 @@ We will evaluate the accuracy of our model by comparing the model’s predicted 
 ### Discussion
 
 There are inherent problems with our approach. For example, individual reviews may be rated from zero to five stars, but we will classify each review only as positive, neutral, or negative. Hypothetically, if every review corresponded to four stars, our classification would cause our model to consider every review positive and predict a rating of five stars. Realistically, however, this problem should not be that significant since the actual reviews should be distributed over a wider range.
+
+### References
+
+[1] Conneau, Alexis et al. “Very Deep Convolutional Networks for Natural Language Processing.” ArXiv abs/1606.01781 (2016): n. Pag.
+
+[2] “Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank.” Deeply Moving: Deep Learning for Sentiment Analysis, nlp.stanford.edu/sentiment/index.html.
+
+[3] Parkhe, V., Biswas, B. Sentiment analysis of movie reviews: finding most important movie aspects using driving factors. Soft Comput 20, 3373–3379 (2016). https://doi.org/10.1007/s00500-015-1779-1
+
+[4] Wu, Jean Y.. “Predicting Sentiment from Rotten Tomatoes Movie Reviews.” (2012).
+
+[5] Andrew L. Maas, Raymond E. Daly, Peter T. Pham, Dan Huang, Andrew Y. Ng, and Christopher Potts. (2011). Learning Word Vectors for Sentiment Analysis. The 49th Annual Meeting of the Association for Computational Linguistics (ACL 2011).
+
+[6] “Movie Review Data.” Data, www.cs.cornell.edu/people/pabo/movie-review-data/.
