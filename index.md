@@ -38,8 +38,6 @@ Below are several randomly selected quotes from the movie reviews in the dataset
 - `wonderland is a rather sugary romance film that is as subtle as a ton of bricks falling on you . you can see its plot developing from a mile away .`
 - `director paul verhoeven , whose previous works include movies as diverse as robocop and basic instinct , takes an especially imaginative and fresh approach to science fiction with his new film starship troopers .`
 
-TODO: Visualization, word cloud of the dataset
-
 <p align="center"><img src="./assets/wordcloud.png" alt="Most common words"/></p>
 <p align="center">Word cloud of our dataset</p>
 
@@ -48,24 +46,22 @@ The following bar graph illustrates how the entire dataset is distributed over t
 <p align="center"><img src="./assets/label_frequencies.png" alt="Frequencies of Labels"/></p>
 <p align="center">Distribution of labels in our dataset</p>
 
-TODO: What pre-processing we perform, what is word2vec (with visualization)
-
 #### word2vec
 We use the word embedding tool word2vec trained on Google News to map the plaintext words contained in each review to vectors. Word2vec was created using a standard neural network with one hidden layer size of 300. The network was trained on Google News to take in a particular word and predict a probability that every word in the corpus would appear in the surrounding context of the input word. The words are all one-hot encoded (so they are all represented by N x 1 one-hot encoded vector, where N is the number of unique words in the corpus), and the last layer includes the softmax activation function, so each element in the output vector is a probability for the word corresponding to that element's position to be found near the input word. In the sentence "The quick brown fox jumps over the lazy dog", for example, some of the training samples (before one-hot encoding) would be "brown" with the label "fox", "brown" with the label "quick", "fox" with the label "jumps", and so on. This way, when fed a particular word, the network would output the highest probabilities for the words that are most likely to be found near the input word. 
 
-<p align="center"><img src="./assets/word2vec_sentence.png" alt="Word2vec Sentence"/></p>
+<p align="center"><img src="./assets/word2vec_sentence.png" alt="Word2vec Sentence" height="300"/></p>
 <p align="center">Source: <a href="https://medium.com/@Aj.Cheng/word2vec-3b2cc79d674">Medium</a></p>
 
 After training, we can extract the weight matrix from the hidden layer, which will be of dimensions 300 x N. If we multiply this matrix and a given word vector (which is of dimension N x 1), we will obtain a 300 x 1 embedding vector corresponding to that word. It makes sense that this vector would embed important contextual information about the input word. Due to the way the network was trained, words that appear in similar contexts will likely have similar word embedding vectors, because the network should produce a similar output context probability vector for words that appear in similar contexts. Thus, in the embedding space, contextually similar words will be clustered together. These vectors capture the semantic meaning of words, which theoretically should lessen the amount of information our predictive model must learn to classify movie review predictions accurately. 
 
 Below is the PCA projection of the embedding vectors of a few key words onto a 2-dimensional space. Very negative words tend to be clustered closely together, while positive ones are further away.
 
-<p align="center"><img src="./assets/word2vec_pca.png" alt="PCA word2vec"/></p>
+<p align="center"><img src="./assets/word2vec_pca.png" alt="PCA word2vec" height="400"/></p>
 <p align="center">2D PCA of word2vec embeddings</p>
 
 However, the classification boundaries are nontrivial - the mere presence of a few key words is not enough to properly classify data. This is shown more clearly below with a t-SNE projection of the embedding vectors of the 300 most informative words. These words were selected because they appeared disproportionately more in one category than another (for example, 'tolerable' appeared nearly 30 times as often in negative reviews than in positive reviews). In the visualization, each word vector is assigned the sentiment category that the word appears most frequently in (e.g. "tolerable" is assigned a negative label). There are 300 words, with 100 from each sentiment category (with 0 being negative, 1 being neutral, and 2 being positive). 
 
-<p align="center"><img src="./assets/word2vectsne.png" alt="TSNE word2vec"/></p>
+<p align="center"><img src="./assets/word2vectsne.png" alt="TSNE word2vec" height="400"/></p>
 <p align="center">2D t-SNE of word2vec embeddings</p>
 
 Although there are a few subtle clusters, there is no clear boundary that separates words from their corresponding category. This is why we turn to a deep CNN model as opposed to a support vector machine, as previous researchers have [8].
@@ -84,8 +80,6 @@ After pre-processing, we are able to pass each word embedding matrix directly in
 
 In our model, our 1-dimensional convolution kernel spans the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. We use a kernel size of 5 along the first dimension, meaning the convolution extracts activations from five words at a time.
 
-TODO: Why we picked this model architecture
-
 <p align="center"><img src="./assets/architecture.png" alt="Model Architecture" height="800"/></p>
 <p align="center">Our model architecture</p>
 
@@ -98,9 +92,9 @@ We spent a considerable amount of time tuning the architecture and hyperparamete
 
 ### Results
 
-To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%. We ultimate were able to achieve a test accuracy of 70.658684% after tuning. Researchers working with the same dataset have been able to attain at best around a 75% accuracy on the same dataset, although many of their other models' performance did not exceed a 70% accuracy [8].
+To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%. We achieved this goal, ultimately reaching a test accuracy of 70.658684% after tuning. 
 
-TODO: Compare to results from literature
+Researchers working with the same dataset have been able to attain around a 65% accuracy on the same dataset using support vector machines [8], which we have improved on by using a deep CNN. However, other sentiment analysis researchers using recursive model architectures have achieved more than an 85% binary sentiment classification accuracy and a 80% fine-grained sentiment classification accuracy. In the future, perhaps such techniques could be compared directly against our approach on the same dataset.
 
 The following are visualizations of how the loss and accuracies across the training and validation sets changed across epochs during training.
 
