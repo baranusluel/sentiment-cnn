@@ -100,7 +100,7 @@ We spent a considerable amount of time tuning the architecture and hyperparamete
 
 ### Results
 
-To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%. We ultimate were able to achieve a test accuracy of 70.658684% after tuning. Researchers working with the same dataset have been able to attain at best around a 75% accuracy on the same dataset, although many of their other models' performance did not exceed a 70% accuracy [8].
+To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%. We ultimate were able to achieve a **test accuracy of 70.658684%** after tuning. Researchers working with the same dataset have been able to attain at best around a 75% accuracy on the same dataset, although many of their other models' performance did not exceed a 70% accuracy [8].
 
 TODO: Compare to results from literature
 
@@ -112,6 +112,12 @@ The following are visualizations of how the loss and accuracies across the train
 <p align="center">Loss and accuracy graphs from training</p>
 
 ### Conclusion
+
+Our deep convolutional neural network performed well on the sentiment analysis task with movie reviews, meeting our initial benchmark goals for accuracy. Based on this performance, we conclude that the approach of using computer vision inspired CNNs for NLP tasks shows promise, since convolution kernels may be able to capture the relations between adjacent words and learn meaningful weights.
+
+A weakness of using CNNs for this task is that the input must be of fixed size. In our case, we truncated or padded as necessary to ensure every movie review input would be 500 words long (in the form of their embedded vectors). However, this can pose a significant limitation for many NLP tasks, which is one reason why recursive neural nets and reccurrent neural nets may be better suited for these kinds of tasks.
+
+Future work could look specifically at how varying the model architecture affects the results, whether transfer learning may be applicable here similar to how it is used in image classifiers, and how one might be able to visualize intermediate activations in the network to get a sense of what features the model is learning.
 
 ### References
 
