@@ -10,7 +10,7 @@ The input data consists of labelled plaintext movie reviews from multiple movie 
 
 The sentiment analysis model may use a convolutional neural network (CNN). Previous work has shown that deep learning [2][4] and CNN’s [1] can be successfully applied to natural language processing tasks. The final layer of the network is a softmax layer with three neurons, with the output of each corresponding to the probability that the given input review is positive, neutral, or negative.
 
-<p align="center"><img src="/assets/architecture.png" alt="Model Architecture" height="800"/></p>
+<p align="center"><img src="./assets/architecture.png" alt="Model Architecture" height="800"/></p>
 
 ### Potential Results
 
@@ -18,9 +18,9 @@ We will evaluate the accuracy of our model by comparing the model’s predicted 
 
 ### Results
 
-<p align="center"><img src="/assets/loss_graph.png" alt="Loss Graph"/></p>
+<p align="center"><img src="./assets/loss_graph.png" alt="Loss Graph"/></p>
 
-<p align="center"><img src="/assets/accuracy_graph.png" alt="Accuracy Graph"/></p>
+<p align="center"><img src="./assets/accuracy_graph.png" alt="Accuracy Graph"/></p>
 
 We achieved an accuracy of 70.658684% on the test set.
 
