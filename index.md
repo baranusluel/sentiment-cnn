@@ -57,23 +57,24 @@ TODO: Why we picked this model architecture
 
 <p align="center"><img src="./assets/architecture.png" alt="Model Architecture" height="800"/></p>
 
-TODO: What we do against overfitting
+As to be expected, during training we initially came across significant overfitting. To address this we introduced:
+- Dropout with a factor of 0.2 at the input layer. Additional dropout in the hidden layers was explored but this impacted the model's performance.
+- L2 kernel and bias regularizers with a factor of 0.04 on the dense/fully-connected layers. We also considered adding regularizers to the convolutional layers, but we found them to be much more sensitive to regularization.
+- Early stopping on training once the validation loss stops improving for 4 epochs. This allows us to avoid further overfitting and wasting time on excess iterations.
 
-TODO: Other implementation details (loss function, early stopping)
+We spent a considerable amount of time tuning the architecture and hyperparameters of our model to achieve the desired accuracy levels. The best results were found with the Adam optimizer using a learning rate of 0.0002. Visualizations of loss vs epochs at this learning rate can be found in the Results section below.
 
 ### Results
 
-We will evaluate the accuracy of our model by comparing the model’s predicted rating for each movie review aggregator to the actual rating. We hope to achieve an accuracy of at least 70%, which approaches the results found in existing literature (mid 70% range with classical ML methods such as SVMs [3], above 80% with deep learning [2]).
+To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%, which approaches the results found in existing literature (mid 70% range with classical ML methods such as SVMs [3], above 80% with deep learning [2]). We ultimate were able to achieve a test accuracy of 70.658684% after tuning.
 
-TODO: Learning rate and other hyperparameters
+TODO: Compare to results from literature
+
+The following are visualizations of how the loss and accuracies across the training and validation sets changed across epochs during training.
 
 <p align="center"><img src="./assets/loss_graph.png" alt="Loss Graph"/></p>
 
 <p align="center"><img src="./assets/accuracy_graph.png" alt="Accuracy Graph"/></p>
-
-We achieved an accuracy of 70.658684% on the test set.
-
-TODO: Compare to results from literature
 
 ### Conclusion
 
