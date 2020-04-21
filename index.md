@@ -4,6 +4,11 @@
 
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
 
+<p align="center">
+<img src="./assets/sentiment.png" alt="Sentiment analysis"/>
+Source: <a href="https://monkeylearn.com/sentiment-analysis/">MonkeyLearn</a>
+</p>
+
 In the literature, the task of sentiment analysis is most commonly performed on online reviews written by consumers because this data is widely available and lends itself well to the task, given that reviews are usually accompanied with numerical ratings.
 
 The sentiment analysis task is an important and widely used application of machine learning, since it allows businesses to automatically identify customer sentiment towards their brands, products and sentiments. Improving the accuracy of sentiment analysis models could result in significant commercial benefits for businesses, which is why we chose to investigate this task.
