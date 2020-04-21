@@ -4,10 +4,8 @@
 
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
 
-<p align="center">
-<img src="./assets/sentiment.png" alt="Sentiment analysis"/>
-Source: <a href="https://monkeylearn.com/sentiment-analysis/">MonkeyLearn</a>
-</p>
+<p align="center"><img src="./assets/sentiment.png" alt="Sentiment analysis"/></p>
+<p align="center">Source: <a href="https://monkeylearn.com/sentiment-analysis/">MonkeyLearn</a></p>
 
 In the literature, the task of sentiment analysis is most commonly performed on online reviews written by consumers because this data is widely available and lends itself well to the task, given that reviews are usually accompanied with numerical ratings.
 
@@ -22,6 +20,9 @@ Our goal is train a model that can predict the correct sentiment labels (negativ
 #### Why Convolutional Neural Networks?
 
 CNNs are neural networks that use convolutional layers, where each layer essentially applies a sliding window kernel to the input data. While they are often used in computer vision on images to capture local spatial information, they can be used in NLP as well, on documents with word embeddings. Such applications of CNNs have been found to perform quite well in extracting useful information such as relationships between words [2][4].
+
+<p align="center"><img src="./assets/cnns.jpeg" alt="Convolutional Neural Networks"/></p>
+<p align="center">Source: <a href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">Sumit Saha</a></p>
 
 We believe that by using a CNN architecture similar to those used for computer vision architectures, we can build an effective sentiment analysis model capable of at least partly capturing the contexual meaning of words. Intuitively, we expect that this approach should outperform simpler bag-of-words techniques, but may not measure up to recursive deep models [2].
 
@@ -40,10 +41,12 @@ Below are several randomly selected quotes from the movie reviews in the dataset
 TODO: Visualization, word cloud of the dataset
 
 <p align="center"><img src="./assets/wordcloud.png" alt="Most common words"/></p>
+<p align="center">Word cloud of our dataset</p>
 
 The following bar graph illustrates how the entire dataset is distributed over the possible output labels (negative/neutral/positive). As shown, there are relatively fewer negative examples, so it is worth noting that our results may be affected by a minor class imbalance inherent in the dataset.
 
 <p align="center"><img src="./assets/label_frequencies.png" alt="Frequencies of Labels"/></p>
+<p align="center">Distribution of labels in our dataset</p>
 
 TODO: What pre-processing we perform, what is word2vec (with visualization)
 
@@ -66,11 +69,12 @@ We have used Keras with a Tensorflow backend for our implementation of the CNN m
 
 After pre-processing, we are able to pass each word embedding matrix directly into a convolutional neural network. Each input instance is of size 500 x 300, where there are 500 words with 300 dimensions for each word.
 
-In our model, our CNN kernel spans the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. We use a kernel size of 5 along the first dimension, meaning the convolution extracts activations from five words at a time.
+In our model, our 1-dimensional convolution kernel spans the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. We use a kernel size of 5 along the first dimension, meaning the convolution extracts activations from five words at a time.
 
 TODO: Why we picked this model architecture
 
 <p align="center"><img src="./assets/architecture.png" alt="Model Architecture" height="800"/></p>
+<p align="center">Our model architecture</p>
 
 As to be expected, during training we initially came across significant overfitting. To address this we introduced:
 - Dropout with a factor of 0.2 at the input layer. Additional dropout in the hidden layers was explored but this impacted the model's performance.
@@ -87,9 +91,10 @@ TODO: Compare to results from literature
 
 The following are visualizations of how the loss and accuracies across the training and validation sets changed across epochs during training.
 
-<p align="center"><img src="./assets/loss_graph.png" alt="Loss Graph"/></p>
-
-<p align="center"><img src="./assets/accuracy_graph.png" alt="Accuracy Graph"/></p>
+<p align="center">
+<img src="./assets/loss_graph.png" alt="Loss Graph"/>
+<img src="./assets/accuracy_graph.png" alt="Accuracy Graph"/></p>
+<p align="center">Loss and accuracy graphs from training</p>
 
 ### Conclusion
 
