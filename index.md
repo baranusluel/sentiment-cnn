@@ -4,9 +4,9 @@ Sentiment analysis is the application of natural language processing (NLP) to le
 
 Our team performs supervised learning with a convolutional neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews from multiple movie review aggregators such as IMDB and Rotten Tomatoes with corresponding sentiment labels, as found in existing datasets [5][6].
 
-TODO: Background, existing literature
+TODO: Background, existing literature. Why we think CNNs could work here
 
-TODO: Why is this important?
+TODO: Motivation, why is this important?
 
 ### Dataset and Pre-Processing
 
@@ -14,11 +14,9 @@ TODO: Where we got the dataset, nature of the data
 
 Below are several randomly selected quotes from the movie reviews in the dataset, to demonstrate the nature of the data:
 
-`hollywood adaptations of plays rarely come off much worse than this b&w one did . there is no kind way to put it otherwise , or to say if only it did this or that the film could have been saved , nor is there reason to say , if the acting was better the film could have been bearable .`
-
-`wonderland is a rather sugary romance film that is as subtle as a ton of bricks falling on you . you can see its plot developing from a mile away .`
-
-`director paul verhoeven , whose previous works include movies as diverse as robocop and basic instinct , takes an especially imaginative and fresh approach to science fiction with his new film starship troopers .`
+- `hollywood adaptations of plays rarely come off much worse than this b&w one did . there is no kind way to put it otherwise , or to say if only it did this or that the film could have been saved , nor is there reason to say , if the acting was better the film could have been bearable .`
+- `wonderland is a rather sugary romance film that is as subtle as a ton of bricks falling on you . you can see its plot developing from a mile away .`
+- `director paul verhoeven , whose previous works include movies as diverse as robocop and basic instinct , takes an especially imaginative and fresh approach to science fiction with his new film starship troopers .`
 
 TODO: Visualization, word cloud of the dataset
 
@@ -26,11 +24,15 @@ TODO: Visualize distribution of positive/neutral/negative labels
 
 TODO: What pre-processing we perform, what is word2vec (with visualization)
 
+TODO: Describe training/validation/test data split
+
 ### Methods
 
 The input data consists of labelled plaintext movie reviews from multiple movie review aggregators such as IMDB and Rotten Tomatoes. We use a word embedding tool such as word2vec to map the plaintext words contained in each review to vectors, which are merged to form a feature set representation. Our model categorizes reviews as positive, neutral, or negative, outputted as 3-element vectors ([1, 0, 0], [0, 1, 0], and [0, 0,1], respectively) from a linear layer. Based on the loss between these outputs and the correct sentiment labels, the model is optimized to predict correctly.
 
 The sentiment analysis model may use a convolutional neural network (CNN). Previous work has shown that deep learning [2][4] and CNN’s [1] can be successfully applied to natural language processing tasks. The final layer of the network is a softmax layer with three neurons, with the output of each corresponding to the probability that the given input review is positive, neutral, or negative.
+
+TODO: What tools/library we used (Keras)
 
 TODO: Why we picked this model architecture
 
@@ -38,9 +40,13 @@ TODO: Why we picked this model architecture
 
 TODO: What we do against overfitting
 
+TODO: Other implementation details (loss function, early stopping)
+
 ### Results
 
 We will evaluate the accuracy of our model by comparing the model’s predicted rating for each movie review aggregator to the actual rating. We hope to achieve an accuracy of at least 70%, which approaches the results found in existing literature (mid 70% range with classical ML methods such as SVMs [3], above 80% with deep learning [2]).
+
+TODO: Learning rate and other hyperparameters
 
 <p align="center"><img src="./assets/loss_graph.png" alt="Loss Graph"/></p>
 
@@ -48,9 +54,9 @@ We will evaluate the accuracy of our model by comparing the model’s predicted 
 
 We achieved an accuracy of 70.658684% on the test set.
 
-### Discussion
+TODO: Compare to results from literature
 
-There are inherent problems with our approach. For example, individual reviews may be rated from zero to five stars, but we will classify each review only as positive, neutral, or negative. Hypothetically, if every review corresponded to four stars, our classification would cause our model to consider every review positive and predict a rating of five stars. Realistically, however, this problem should not be that significant since the actual reviews should be distributed over a wider range.
+### Conclusion
 
 ### References
 
