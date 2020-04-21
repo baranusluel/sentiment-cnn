@@ -14,7 +14,9 @@ TODO: Motivation, why is this important?
 
 ### Dataset and Pre-Processing
 
-TODO: Where we got the dataset, nature of the data
+For our movie review data, we used "Scale Dataset v1.0" by Bo Pang et al [6]. This dataset has been commonly studied in the literature for the task of sentiment analysis [7], which is why we found it appropriate for our investigation.
+
+The dataset contains 5006 total examples, in the form of a tokenized plaintext movie review and an associated label for each example. We have used the 3-class labels provided in the dataset, which are interpreted as 0 (negative), 1 (neutral) and 2 (positive).
 
 Below are several randomly selected quotes from the movie reviews in the dataset, to demonstrate the nature of the data:
 
@@ -30,7 +32,7 @@ The following bar graph illustrates how the entire dataset is distributed over t
 
 TODO: What pre-processing we perform, what is word2vec (with visualization)
 
-TODO: Describe training/validation/test data split
+At the end of our pre-processing, we randomly split the dataset into training, validation and test sets at proportions of 60% / 20% / 20% respectively. This means our training set is composed of 3003 examples.
 
 ### Methods
 
@@ -87,4 +89,6 @@ TODO: Compare to results from literature
 
 [5] Andrew L. Maas, Raymond E. Daly, Peter T. Pham, Dan Huang, Andrew Y. Ng, and Christopher Potts. (2011). Learning Word Vectors for Sentiment Analysis. The 49th Annual Meeting of the Association for Computational Linguistics (ACL 2011).
 
-[6] “Movie Review Data.” Data, www.cs.cornell.edu/people/pabo/movie-review-data/.
+[6] Pang, Bo et al. “Movie Review Data.” www.cs.cornell.edu/people/pabo/movie-review-data/.
+
+[7] Pang, Bo et al. "Papers using our movie review data." http://www.cs.cornell.edu/people/pabo/movie-review-data/otherexperiments.html
