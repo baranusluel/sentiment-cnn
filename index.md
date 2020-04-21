@@ -6,6 +6,10 @@ Our team performs supervised learning with a convolutional neural network model 
 
 TODO: Background, existing literature. Why we think CNNs could work here
 
+### CNNs
+
+Convolutional Neural Networks (CNNs) are neural networks that use convolutional layers, where each layer essentially applies a sliding window function to some input data. While it is often used in computer vision on images represented as pixel matrices, they can be used in NLP as well, on documents represented as sentence matrices. CNNs use filters that slide over these matrices, and they have been found to perform quite well in extracting useful information such as relationships between words. We chose to develop a CNN model after reading through references on the use of CNNs on sentiment analysis problems. 
+
 TODO: Motivation, why is this important?
 
 ### Dataset and Pre-Processing
