@@ -6,7 +6,7 @@ Our team performs supervised learning with a convolutional neural network model 
 
 TODO: Background, existing literature. Why we think CNNs could work here
 
-### CNNs
+#### CNNs
 
 Convolutional Neural Networks (CNNs) are neural networks that use convolutional layers, where each layer essentially applies a sliding window function to some input data. While it is often used in computer vision on images represented as pixel matrices, they can be used in NLP as well, on documents represented as sentence matrices. CNNs use filters that slide over these matrices, and they have been found to perform quite well in extracting useful information such as relationships between words. We chose to develop a CNN model after reading through references on the use of CNNs on sentiment analysis problems. 
 
@@ -24,7 +24,9 @@ Below are several randomly selected quotes from the movie reviews in the dataset
 
 TODO: Visualization, word cloud of the dataset
 
-TODO: Visualize distribution of positive/neutral/negative labels
+The following bar graph illustrates how the entire dataset is distributed over the possible output labels (negative/neutral/positive). As shown, there are relatively fewer negative examples, so it is worth noting that our results may be affected by a minor class imbalance inherent in the dataset.
+
+<p align="center"><img src="./assets/label_frequencies.png" alt="Frequencies of Labels"/></p>
 
 TODO: What pre-processing we perform, what is word2vec (with visualization)
 
