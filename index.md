@@ -53,9 +53,15 @@ TODO: What pre-processing we perform, what is word2vec (with visualization)
 #### word2vec
 We use the word embedding tool word2vec trained on Google News to map the plaintext words contained in each review to vectors. Word2vec was created using a standard neural network with one hidden layer size of 300. The network was trained on Google News to take in a particular word and predict a probability that every word in the corpus would appear in the surrounding context of the input word. The words are all one-hot encoded (so they are all represented by N x 1 one-hot encoded vector, where N is the number of unique words in the corpus), and the last layer includes the softmax activation function, so each element in the output vector is a probability for the word corresponding to that element's position to be found near the input word. In the sentence "The quick brown fox jumps over the lazy dog", for example, some of the training samples (before one-hot encoding) would be "brown" with the label "fox", "brown" with the label "quick", "fox" with the label "jumps", and so on. This way, when fed a particular word, the network would output the highest probabilities for the words that are most likely to be found near the input word. 
 
-IMAGE
+<p align="center"><img src="./assets/word2vec_sentence.png" alt="Word2vec Sentence"/></p>
+<p align="center">Source: <a href="https://medium.com/@Aj.Cheng/word2vec-3b2cc79d674">Medium</a></p>
 
 After training, we can extract the weight matrix from the hidden layer, which will be of dimensions 300 x N. If we multiply this matrix and a given word vector (which is of dimension N x 1), we will obtain a 300 x 1 embedding vector corresponding to that word. It makes sense that this vector would embed important contextual information about the input word. Due to the way the network was trained, words that appear in similar contexts will likely have similar word embedding vectors, because the network should produce a similar output context probability vector for words that appear in similar contexts. Thus, in the embedding space, contextually similar words will be clustered together. These vectors capture the semantic meaning of words, which theoretically should lessen the amount of information our predictive model must learn to classify movie review predictions accurately. 
+
+Below is the PCA projection of the embedding vectors of a few key words onto a 2-dimensional space. Very negative words tend to be clustered closely together, while positive ones are further away.
+
+<p align="center"><img src="./assets/word2vec_pca.png" alt="PCA word2vec"/></p>
+<p align="center">2D PCA of word2vec embeddings</p>
 
 We restrict ourselves to processing the first 500 words that word2vec accounts for of every review (ignoring words not in the word2vec embedding, thus removing punctuation and obscure words, as the word2vec embedding is fairly comprehensive). (Further preprocessing, such as removing the least meaningful words that were common to reviews with every rating from 0 to 2, did not yield any improvements in accuracy.) 
 
