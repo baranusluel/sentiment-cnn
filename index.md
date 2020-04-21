@@ -6,17 +6,19 @@ Sentiment analysis is the application of natural language processing (NLP) to le
 
 In the literature, the task of sentiment analysis is most commonly performed on online reviews written by consumers because this data is widely available and lends itself well to the task, given that reviews are usually accompanied with numerical ratings.
 
-Our team will perform supervised learning with a convolutional neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews previously collected into a commonly studied dataset [6].
-
-#### Motivation
-
-TODO: Motivation, why is this important?
-
-TODO: Background, existing literature. Why we think CNNs could work here
+The sentiment analysis task is an important and widely used application of machine learning, since it allows businesses to automatically identify customer sentiment towards their brands, products and sentiments. Improving the accuracy of sentiment analysis models could result in significant commercial benefits for businesses, which is why we chose to investigate this task.
 
 #### Our Goal
 
+Our team will perform supervised learning with a convolutional neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews previously collected into a commonly studied dataset [6].
+
 Our goal is train a model that can predict the correct sentiment labels (negative/neutral/positive) for previously unseen movie reviews with an accuracy of at least 70%, which approaches the results found in existing literature (mid 70% range with classical ML methods such as SVMs [3], above 80% with deep learning [2]). Given that the accuracy at random for a 3-class classifier would be 33%, we believe our goal of 70% is a non-trivial but realistic target.
+
+#### Why Convolutional Neural Networks?
+
+CNNs are neural networks that use convolutional layers, where each layer essentially applies a sliding window kernel to the input data. While they are often used in computer vision on images to capture local spatial information, they can be used in NLP as well, on documents with word embeddings. Such applications of CNNs have been found to perform quite well in extracting useful information such as relationships between words [2][4].
+
+We believe that by using a CNN architecture similar to those used for computer vision architectures, we can build an effective sentiment analysis model capable of at least partly capturing the contexual meaning of words. Intuitively, we expect that this approach should outperform simpler bag-of-words techniques, but may not measure up to recursive deep models [2].
 
 ### Dataset and Pre-Processing
 
@@ -53,15 +55,11 @@ At the end of our pre-processing, we randomly split the dataset into training, v
 
 ### Methods
 
-We pass each word embedding matrix directly into a convolutional neural network. 
+We have used Keras with a Tensorflow backend for our implementation of the CNN model due to its simplicity. Our code was written in a Jupyter Notebook (available on github repo) and executed on Google Colab for convenience and computational resources.
 
-#### Convolutional Neural Networks (CNNs)
+After pre-processing, we are able to pass each word embedding matrix directly into a convolutional neural network. Each input instance is of size 500 x 300, where there are 500 words with 300 dimensions for each word.
 
-CNNs are neural networks that use convolutional layers, where each layer essentially applies a sliding window kernel to the input data. While it is often used in computer vision on images represented as pixel matrices with small kernel sizes to capture local spatial information, they can be used in NLP as well, on documents represented as sentence matrices. Such applications of CNNs have been found to perform quite well in extracting useful information such as relationships between words according to previous research on sentiment analysis problems [2][4]. In our model, our CNN kernel spans the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. This is unlike traditional applications of CNNs to images, where all kernel dimensions tend to be very small. 
-
-We used Keras to implement a CNN with the following architecture:
-
-TODO: What tools/library we used (Keras)
+In our model, our CNN kernel spans the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. We use a kernel size of 5 along the first dimension, meaning the convolution extracts activations from five words at a time.
 
 TODO: Why we picked this model architecture
 
