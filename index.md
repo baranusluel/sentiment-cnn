@@ -63,7 +63,14 @@ Below is the PCA projection of the embedding vectors of a few key words onto a 2
 <p align="center"><img src="./assets/word2vec_pca.png" alt="PCA word2vec"/></p>
 <p align="center">2D PCA of word2vec embeddings</p>
 
-We restrict ourselves to processing the first 500 words that word2vec accounts for of every review (ignoring words not in the word2vec embedding, thus removing punctuation and obscure words, as the word2vec embedding is fairly comprehensive). (Further preprocessing, such as removing the least meaningful words that were common to reviews with every rating from 0 to 2, did not yield any improvements in accuracy.) 
+However, the classification boundaries are nontrivial - the mere presence of a few key words is not enough to properly classify data. This is shown more clearly below with a t-SNE projection of the embedding vectors of the 300 most informative words. These words were selected because they appeared disproportionately more in one category than another (for example, 'tolerable' appeared nearly 30 times as often in negative reviews than in positive reviews). In the visualization, each word vector is assigned the sentiment category that the word appears most frequently in (e.g. "tolerable" is assigned a negative label). There are 300 words, with 100 from each sentiment category (with 0 being negative, 1 being neutral, and 2 being positive). 
+
+<p align="center"><img src="./assets/word2vectsne.png" alt="TSNE word2vec"/></p>
+<p align="center">2D t-SNE of word2vec embeddings</p>
+
+Although there are a few subtle clusters, there is no clear boundary that separates words from their corresponding category. This is why we turn to a deep CNN model as opposed to a support vector machine, as previous researchers have [8].
+
+We restrict ourselves to processing the first 500 words that word2vec accounts for of every review (ignoring words not in the word2vec embedding, thus removing punctuation and obscure words, as the word2vec embedding is fairly comprehensive). (Further preprocessing, such as removing the least meaningful words that were common to reviews with every rating from negative to positive, did not yield any improvements in accuracy.) 
 
 For every review, we stack the corresponding word vectors sequentially, creating a 500 x 300 matrix. If a particular review contains less than 500 words, we pad the rows with zero vectors until the matrix has length 500. 
 
