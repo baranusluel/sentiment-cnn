@@ -44,6 +44,8 @@ Below are several randomly selected quotes from the movie reviews in the dataset
 
 TODO: Visualization, word cloud of the dataset
 
+<p align="center"><img src="./assets/wordcloud.png" alt="Most common words"/></p>
+
 The following bar graph illustrates how the entire dataset is distributed over the possible output labels (negative/neutral/positive). As shown, there are relatively fewer negative examples, so it is worth noting that our results may be affected by a minor class imbalance inherent in the dataset.
 
 <p align="center">
