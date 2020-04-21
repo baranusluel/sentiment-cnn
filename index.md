@@ -38,7 +38,7 @@ Below are several randomly selected quotes from the movie reviews in the dataset
 - `wonderland is a rather sugary romance film that is as subtle as a ton of bricks falling on you . you can see its plot developing from a mile away .`
 - `director paul verhoeven , whose previous works include movies as diverse as robocop and basic instinct , takes an especially imaginative and fresh approach to science fiction with his new film starship troopers .`
 
-TODO: Visualization, word cloud of the dataset
+We have generated the following word cloud of the most commonly found words in the dataset, excluding the least meaningful words:
 
 <p align="center"><img src="./assets/wordcloud.png" alt="Most common words"/></p>
 <p align="center">Word cloud of our dataset</p>
@@ -48,10 +48,10 @@ The following bar graph illustrates how the entire dataset is distributed over t
 <p align="center"><img src="./assets/label_frequencies.png" alt="Frequencies of Labels"/></p>
 <p align="center">Distribution of labels in our dataset</p>
 
-TODO: What pre-processing we perform, what is word2vec (with visualization)
-
 #### word2vec
-We use the word embedding tool word2vec trained on Google News to map the plaintext words contained in each review to vectors. Word2vec was created using a standard neural network with one hidden layer size of 300. The network was trained on Google News to take in a particular word and predict a probability that every word in the corpus would appear in the surrounding context of the input word. The words are all one-hot encoded (so they are all represented by N x 1 one-hot encoded vector, where N is the number of unique words in the corpus), and the last layer includes the softmax activation function, so each element in the output vector is a probability for the word corresponding to that element's position to be found near the input word. In the sentence "The quick brown fox jumps over the lazy dog", for example, some of the training samples (before one-hot encoding) would be "brown" with the label "fox", "brown" with the label "quick", "fox" with the label "jumps", and so on. This way, when fed a particular word, the network would output the highest probabilities for the words that are most likely to be found near the input word. 
+We use the word embedding tool word2vec trained on Google News to map the plaintext words contained in each review to vectors with 300 features.
+
+Word2vec was created using a standard neural network with one hidden layer size of 300. The network was trained on Google News to take in a particular word and predict a probability that every word in the corpus would appear in the surrounding context of the input word. The words are all one-hot encoded (so they are all represented by N x 1 one-hot encoded vector, where N is the number of unique words in the corpus), and the last layer includes the softmax activation function, so each element in the output vector is a probability for the word corresponding to that element's position to be found near the input word. In the sentence "The quick brown fox jumps over the lazy dog", for example, some of the training samples (before one-hot encoding) would be "brown" with the label "fox", "brown" with the label "quick", "fox" with the label "jumps", and so on. This way, when fed a particular word, the network would output the highest probabilities for the words that are most likely to be found near the input word. 
 
 <p align="center"><img src="./assets/word2vec_sentence.png" alt="Word2vec Sentence"/></p>
 <p align="center">Source: <a href="https://medium.com/@Aj.Cheng/word2vec-3b2cc79d674">Medium</a></p>
@@ -63,16 +63,16 @@ Below is the PCA projection of the embedding vectors of a few key words onto a 2
 <p align="center"><img src="./assets/word2vec_pca.png" alt="PCA word2vec"/></p>
 <p align="center">2D PCA of word2vec embeddings</p>
 
-However, the classification boundaries are nontrivial - the mere presence of a few key words is not enough to properly classify data. This is shown more clearly below with a t-SNE projection of the embedding vectors of the 300 most informative words. These words were selected because they appeared disproportionately more in one category than another (for example, 'tolerable' appeared nearly 30 times as often in negative reviews than in positive reviews). In the visualization, each word vector is assigned the sentiment category that the word appears most frequently in (e.g. "tolerable" is assigned a negative label). There are 300 words, with 100 from each sentiment category (with 0 being negative, 1 being neutral, and 2 being positive). 
+However, the classification boundaries are nontrivial - the mere presence of a few key words is not enough to properly classify data. This is shown more clearly below with a t-SNE projection of the embedding vectors of the 300 most informative words. These words were selected because they appeared disproportionately more in one category than another (for example, 'tolerable' appeared nearly 30 times as often in negative reviews than in positive reviews). In the visualization, each word vector is assigned the sentiment category that the word appears most frequently in (e.g. "tolerable" is assigned a negative label). There are 300 words, with 100 from each sentiment category (with 0 being negative, 1 being neutral, and 2 being positive).
 
 <p align="center"><img src="./assets/word2vectsne.png" alt="TSNE word2vec"/></p>
 <p align="center">2D t-SNE of word2vec embeddings</p>
 
 Although there are a few subtle clusters, there is no clear boundary that separates words from their corresponding category. This is why we turn to a deep CNN model as opposed to a support vector machine, as previous researchers have [8].
 
-We restrict ourselves to processing the first 500 words that word2vec accounts for of every review (ignoring words not in the word2vec embedding, thus removing punctuation and obscure words, as the word2vec embedding is fairly comprehensive). (Further preprocessing, such as removing the least meaningful words that were common to reviews with every rating from negative to positive, did not yield any improvements in accuracy.) 
+We restrict ourselves to processing the first 500 words from of every review (ignoring words not in the word2vec embedding, thus removing punctuation and obscure words, as the word2vec embedding is fairly comprehensive). Note that further preprocessing, such as removing the least meaningful words that were common to reviews with every rating from negative to positive, did not yield improvements in accuracy.
 
-For every review, we stack the corresponding word vectors sequentially, creating a 500 x 300 matrix. If a particular review contains less than 500 words, we pad the rows with zero vectors until the matrix has length 500. 
+For every review, we stack the corresponding word vectors sequentially, creating a 500 x 300 matrix. If a particular review contains less than 500 words, we pad the rows with zero vectors such that the matrix has length 500.
 
 At the end of our pre-processing, we randomly split the dataset into training, validation and test sets at proportions of 60% / 20% / 20% respectively. This means our training set is composed of 3003 examples.
 
@@ -82,16 +82,18 @@ We have used Keras with a Tensorflow backend for our implementation of the CNN m
 
 After pre-processing, we are able to pass each word embedding matrix directly into a convolutional neural network. Each input instance is of size 500 x 300, where there are 500 words with 300 dimensions for each word.
 
-In our model, our 1-dimensional convolution kernel spans the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. We use a kernel size of 5 along the first dimension, meaning the convolution extracts activations from five words at a time.
+Our CNN model architecture is inspired by those commonly used for computer vision. It is composed of four 1-d convolution layers with ReLU activations, and maxpool layers in between using a pool size of 2. The data is then flattened and passed through a dense/fully-connected layer that is 128 features long, and finally to the dense output layer with 3 softmaxed outputs which give us the 3-class label prediction. As our loss function we use cross entropy loss (`sparse_categorical_crossentropy`), since this is a classification problem. A diagram of our model can be found below.
 
-TODO: Why we picked this model architecture
+We experimented with the architecture of the model by adding and removing layers, changing the width of the layers, number of kernels, and so on. Eventually this architecture was found to perform well for the task at hand, by comparing the test accuracies.
+
+In our model, the 1-dimensional convolution kernels span the breadth of the entire word vector (300), as we are interested in the sequential relationship between word vectors, not between segments of the same word vector. We use a kernel size of 5 along the first dimension, meaning the convolution extracts activations from five words at a time.
 
 <p align="center"><img src="./assets/architecture.png" alt="Model Architecture" height="800"/></p>
 <p align="center">Our model architecture</p>
 
 As to be expected, during training we initially came across significant overfitting. To address this we introduced:
 - Dropout with a factor of 0.2 at the input layer. Additional dropout in the hidden layers was explored but this impacted the model's performance.
-- L2 kernel and bias regularizers with a factor of 0.04 on the dense/fully-connected layers. We also considered adding regularizers to the convolutional layers, but we found them to be much more sensitive to regularization.
+- L2 kernel and bias regularizers with a factor of 0.04 on the dense layers. We also considered adding regularizers to the convolutional layers, but we found them to be much more sensitive to regularization.
 - Early stopping on training once the validation loss stops improving for 4 epochs. This allows us to avoid further overfitting and wasting time on excess iterations.
 
 We spent a considerable amount of time tuning the architecture and hyperparameters of our model to achieve the desired accuracy levels. The best results were found with the Adam optimizer using a learning rate of 0.0002. Visualizations of loss vs epochs at this learning rate can be found in the Results section below.
