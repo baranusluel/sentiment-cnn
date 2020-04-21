@@ -1,16 +1,26 @@
 ### Introduction
 
+#### What is Sentiment Analysis?
+
 Sentiment analysis is the application of natural language processing (NLP) to learn and determine the emotion or feeling associated with a statement. This feeling can be categorized as positive, neutral or negative; sad, angry, or happy; as a rating from 1 to 10; etc.
 
-Our team performs supervised learning with a convolutional neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews from multiple movie review aggregators such as IMDB and Rotten Tomatoes with corresponding sentiment labels, as found in existing datasets [5][6].
+In the literature, the task of sentiment analysis is most commonly performed on online reviews written by consumers because this data is widely available and lends itself well to the task, given that reviews are usually accompanied with numerical ratings.
+
+Our team will perform supervised learning with a convolutional neural network model to perform sentiment analysis on movie reviews. The corpus consists of reviews previously collected into a commonly studied dataset [6].
+
+#### Motivation
+
+TODO: Motivation, why is this important?
 
 TODO: Background, existing literature. Why we think CNNs could work here
 
-#### CNNs
+#### Convolutional Neural Networks (CNNs)
 
-Convolutional Neural Networks (CNNs) are neural networks that use convolutional layers, where each layer essentially applies a sliding window function to some input data. While it is often used in computer vision on images represented as pixel matrices, they can be used in NLP as well, on documents represented as sentence matrices. CNNs use filters that slide over these matrices, and they have been found to perform quite well in extracting useful information such as relationships between words. We chose to develop a CNN model after reading through references on the use of CNNs on sentiment analysis problems. 
+CNNs are neural networks that use convolutional layers, where each layer essentially applies a sliding window function to some input data. While it is often used in computer vision on images represented as pixel matrices, they can be used in NLP as well, on documents represented as sentence matrices. CNNs use filters that slide over these matrices, and they have been found to perform quite well in extracting useful information such as relationships between words. We chose to develop a CNN model after reading through references on the use of CNNs for sentiment analysis problems.
 
-TODO: Motivation, why is this important?
+#### Our Goal
+
+Our goal is train a model that can predict the correct sentiment labels (negative/neutral/positive) for previously unseen movie reviews with an accuracy of at least 70%, which approaches the results found in existing literature (mid 70% range with classical ML methods such as SVMs [3], above 80% with deep learning [2]). Given that the accuracy at random for a 3-class classifier would be 33%, we believe our goal of 70% is a non-trivial but realistic target.
 
 ### Dataset and Pre-Processing
 
@@ -66,7 +76,7 @@ We spent a considerable amount of time tuning the architecture and hyperparamete
 
 ### Results
 
-To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%, which approaches the results found in existing literature (mid 70% range with classical ML methods such as SVMs [3], above 80% with deep learning [2]). We ultimate were able to achieve a test accuracy of 70.658684% after tuning.
+To evaluate our model, we look at the accuracy with which movie reviews are assigned the correct labels. In our initial proposal, we hoped to achieve an accuracy of at least 70%. We ultimate were able to achieve a test accuracy of 70.658684% after tuning.
 
 TODO: Compare to results from literature
 
